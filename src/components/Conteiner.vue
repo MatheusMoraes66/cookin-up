@@ -1,13 +1,13 @@
 <script lang="ts">
 import SelectIngredients from './SelectIngredients.vue';
-
+import Tag from './Tag.vue';
     export default {
         data(){
             return {
                 ingredients: ['Alho', 'Manteiga', 'Orégano']
             }
         },
-        components: {SelectIngredients}
+        components: {SelectIngredients, Tag}
     }
 </script>
 
@@ -19,7 +19,7 @@ import SelectIngredients from './SelectIngredients.vue';
             </span>
             <ul v-if="ingredients.length != 0" class="your-ingredients-list">
                 <li v-for="ingredient in ingredients" v-bind:key="ingredient" class="ingredients">
-                    {{ ingredient }}
+                  <Tag :text="ingredient" active/>
                 </li>
             </ul>
             <p v-else class="paragraph empty-list">
@@ -59,17 +59,7 @@ import SelectIngredients from './SelectIngredients.vue';
   flex-wrap: wrap;
 }
 
-.ingredients {
-  display: inline-block;
-  border-radius: 0.5rem;
-  min-width: 4.25rem;
-  padding: 0.5rem;
-  text-align: center;
-    transition: 0.2s;
-    color: var(--cream, #FFFAF3);
-  background: var(--coral, #F0633C);
-  font-weight: 700;
-}
+
 
 .empty-list {
   display: flex;

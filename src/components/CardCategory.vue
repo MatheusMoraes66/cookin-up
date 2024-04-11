@@ -1,30 +1,34 @@
 <script lang="ts">
-    import type ICategory from '@/interface/ICategory';
+import type ICategory from '@/interface/ICategory';
+import Tag from './Tag.vue';
 import type { PropType } from 'vue';
-    
-    export default {
-        props: {
-            category: {type: Object as PropType<ICategory>, required: true}
-        }
-    }
+
+export default {
+  props: {
+    category: { type: Object as PropType<ICategory>, required: true }
+  },
+  components: {
+    Tag
+  }
+}
 </script>
 
 <template>
-    <article class="category">
-        <header class="category__header">
-            <img v-bind:src="`/image/icons/category_ingredients/${category.image}`" alt="" class="category__image">
+  <article class="category">
+    <header class="category__header">
+      <img v-bind:src="`/image/icons/category_ingredients/${category.image}`" alt="" class="category__image">
 
-            <h2 class="paragraph-lg category__name">
-                {{ category.name }}
-            </h2>
+      <h2 class="paragraph-lg category__name">
+        {{ category.name }}
+      </h2>
 
-            <ul class="category__ingredients">
-                <li v-for="ingredient in category.ingredients" v-bind:key="ingredient">
-                    {{ ingredient }}
-                </li>
-            </ul>
-        </header>
-    </article>
+      <ul class="category__ingredients">
+        <li v-for="ingredient in category.ingredients" v-bind:key="ingredient">
+          <Tag :text="ingredient"  />
+        </li>
+      </ul>
+    </header>
+  </article>
 </template>
 
 <style scoped>
@@ -65,5 +69,4 @@ import type { PropType } from 'vue';
   gap: 0.5rem;
   flex-wrap: wrap;
 }
-
 </style>
