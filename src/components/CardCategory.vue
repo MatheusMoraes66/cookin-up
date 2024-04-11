@@ -10,7 +10,21 @@ import type { PropType } from 'vue';
 </script>
 
 <template>
-    {{category.name}}
+    <article class="category">
+        <header class="category__header">
+            <img v-bind:src="`/image/icons/category_ingredients/${category.image}`" alt="" class="category__image">
+
+            <h2 class="paragraph-lg category__name">
+                {{ category.name }}
+            </h2>
+
+            <ul class="category__ingredients">
+                <li v-for="ingredient in category.ingredients" v-bind:key="ingredient">
+                    {{ ingredient }}
+                </li>
+            </ul>
+        </header>
+    </article>
 </template>
 
 <style scoped>
