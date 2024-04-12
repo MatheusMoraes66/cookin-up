@@ -4,17 +4,27 @@ import ListCategories from './ListCategories.vue';
     export default {
         data(){
             return {
-                ingredients: ['Alho', 'Manteiga', 'Orégano']
+                ingredients: []as Array<string>
             }
         },
-        components: {ListCategories, ListIngredients}
+        components: {ListCategories, ListIngredients},
+        methods: {
+          addIngredient(ingredient: string){
+            this.ingredients.push(ingredient);
+          },
+          removeIngredient(ingredient: string){
+           this.ingredients = this.ingredients.filter((item) => item !== ingredient);
+          }
+        }
     }
 </script>
 
 <template>
     <main class="main-content">
         <ListIngredients :ingredients="ingredients"/>
-        <ListCategories/>
+        <ListCategories 
+          @add-ingredient="addIngredient($event)" 
+          @remove-ingredient="removeIngredient($event)"/>
     </main>
 </template>
 

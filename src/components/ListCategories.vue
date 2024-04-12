@@ -17,7 +17,8 @@ import CardCategory from './CardCategory.vue';
         },
         components: {
           CardCategory
-        }
+        },
+        emits: ['addIngredient', 'removeIngredient']
     }
 </script>
 
@@ -31,7 +32,10 @@ import CardCategory from './CardCategory.vue';
 
         <ul class="category">
             <li v-for="category in categories" v-bind:key="category.name">
-               <CardCategory :category="category"/>
+               <CardCategory 
+               @remove-ingredient="$emit('removeIngredient', $event)"
+               @add-ingredient="$emit('addIngredient', $event)"
+               :category="category"/>
             </li>
         </ul>
 

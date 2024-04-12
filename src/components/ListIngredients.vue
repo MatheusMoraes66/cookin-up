@@ -18,7 +18,7 @@ export default {
         </span>
         <ul v-if="ingredients.length != 0" class="your-ingredients-list">
             <li v-for="ingredient in ingredients" v-bind:key="ingredient" class="ingredients">
-                <Tag :text="ingredient" active />
+                <Tag  :text="ingredient" active />
             </li>
         </ul>
         <p v-else class="paragraph empty-list">
