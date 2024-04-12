@@ -1,13 +1,14 @@
 <script lang="ts">
 import ListIngredients from './ListIngredients.vue';
 import ListCategories from './ListCategories.vue';
+import Footer from './Footer.vue';
     export default {
         data(){
             return {
                 ingredients: []as Array<string>
             }
         },
-        components: {ListCategories, ListIngredients},
+        components: {ListCategories, ListIngredients, Footer},
         methods: {
           addIngredient(ingredient: string){
             this.ingredients.push(ingredient);
@@ -26,6 +27,7 @@ import ListCategories from './ListCategories.vue';
           @add-ingredient="addIngredient($event)" 
           @remove-ingredient="removeIngredient($event)"/>
     </main>
+    <Footer/>
 </template>
 
 <style scoped>

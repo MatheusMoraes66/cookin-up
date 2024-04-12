@@ -2,7 +2,9 @@
 
 import { getCategories } from '@/http';
 import type ICategory from '@/interface/ICategory';
+
 import CardCategory from './CardCategory.vue';
+import Button from './Button.vue';
 
     export default {
         data(){
@@ -16,7 +18,7 @@ import CardCategory from './CardCategory.vue';
             this.categories = await getCategories();
         },
         components: {
-          CardCategory
+          CardCategory, Button
         },
         emits: ['addIngredient', 'removeIngredient']
     }
@@ -42,6 +44,8 @@ import CardCategory from './CardCategory.vue';
         <p class="paragraph tip">
             *Atenção: consideramos que você tem em casa sal, pimenta e água.
         </p>
+
+        <Button text="Buscar receitas!"/>
     </section>
 </template>
 
