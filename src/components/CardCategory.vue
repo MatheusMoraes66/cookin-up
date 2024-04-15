@@ -1,6 +1,5 @@
 <script lang="ts">
 import type ICategory from '@/interface/ICategory';
-import Tag from './Tag.vue';
 import type { PropType } from 'vue';
 import SelectIngredients from './SelectIngredients.vue';
 
@@ -18,7 +17,9 @@ export default {
 <template>
   <article class="category">
     <header class="category__header">
-      <img v-bind:src="`/image/icons/category_ingredients/${category.image}`" alt="" class="category__image">
+      <img v-bind:src="`/image/icons/category_ingredients/${category.image}`" 
+      alt="Imagem das categorias dos igredientes" 
+      class="category__image">
 
       <h2 class="paragraph-lg category__name">
         {{ category.name }}

@@ -1,33 +1,51 @@
 <script lang="ts">
 import ListIngredients from './ListIngredients.vue';
-import ListCategories from './ListCategories.vue';
+import CategoryList from './CategoryList.vue';
 import Footer from './Footer.vue';
-    export default {
-        data(){
-            return {
-                ingredients: []as Array<string>
-            }
-        },
-        components: {ListCategories, ListIngredients, Footer},
-        methods: {
-          addIngredient(ingredient: string){
-            this.ingredients.push(ingredient);
-          },
-          removeIngredient(ingredient: string){
-           this.ingredients = this.ingredients.filter((item) => item !== ingredient);
-          }
-        }
+import RecipeList from './RecipeList.vue';
+
+type Screen = 'CategoryList' | 'RecipeList';
+export default {
+  data() {
+    return {
+      ingredients: [] as Array<string>,
+      screen: 'CategoryList' as Screen
     }
+  },
+  components: { CategoryList, ListIngredients, Footer, RecipeList},
+  methods: {
+    addIngredient(ingredient: string) {
+      this.ingredients.push(ingredient);
+    },
+    removeIngredient(ingredient: string) {
+      this.ingredients = this.ingredients.filter((item) => item !== ingredient);
+    },
+    navigate(screen: Screen){
+      this.screen = screen;
+    }
+  }
+}
 </script>
 
 <template>
-    <main class="main-content">
-        <ListIngredients :ingredients="ingredients"/>
-        <ListCategories 
-          @add-ingredient="addIngredient($event)" 
-          @remove-ingredient="removeIngredient($event)"/>
-    </main>
-    <Footer/>
+  <main class="main-content">
+    <ListIngredients :ingredients="ingredients" />
+    <!-- Esse componente mantem os states dos components -->
+    <KeepAlive include="CategoryList"> 
+      <CategoryList  
+        v-if="screen == 'CategoryList'"
+        @add-ingredient="addIngredient($event)" 
+        @remove-ingredient="removeIngredient($event)" 
+        @search-for-recipe="navigate('RecipeList')"
+      />
+      <RecipeList 
+        v-else-if="screen == 'RecipeList'" 
+        :ingredients="ingredients"
+        @edit-ingredients="navigate('CategoryList')"
+        />
+    </KeepAlive>
+  </main>
+  <Footer />
 </template>
 
 <style scoped>
